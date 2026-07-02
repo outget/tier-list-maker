@@ -5,6 +5,7 @@ class_name Tier
 @onready var tier_text := %LineEdit
 @onready var icon := %Icon
 @onready var stylebox = icon.get_theme_stylebox("panel") as StyleBoxFlat
+@onready var cb := %ContentBox
 
 const TIER_LABELS: PackedStringArray = [
 	"S",
@@ -50,7 +51,8 @@ func _ready() -> void:
 
 
 func _on_delete_pressed() -> void:
-	queue_free()
+	if cb.get_child_count() == 0:
+		queue_free()
 
 
 func _on_line_edit_editing_toggled(toggled_on: bool) -> void:
