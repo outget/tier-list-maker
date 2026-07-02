@@ -7,6 +7,9 @@ class_name TierList
 @onready var grid_con := %GridContainer
 @onready var tier_scene: PackedScene = preload("res://scenes/tier.tscn")
 @onready var target_path := ProjectSettings.globalize_path("user://images")
+@onready var tierlist_line_edit := %TierListNameEdit
+
+var tierlist_name: String
 
 
 func new_tier() -> void:
@@ -40,3 +43,31 @@ func _on_reload_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+func save_tierlist(tl_name: String):
+	if not tl_name:
+		printerr("Filename cannot be empty.")
+		return
+
+	var tier_n := tiers.get_child_count()
+
+	var save_dict: Dictionary = {
+		"tierlist_name" = tl_name,
+		"tier_count" = tier_n,
+		"images" = [],
+	}
+
+	for tier in tiers.get_children():
+		var tier_images = []
+		for img in tier.get_node("%ContentBox").get_children():
+			tier_images.append(img.get_path())
+
+		save_dict["images"].append(tier_images)
+
+	print(save_dict)
+
+
+func _on_save_pressed() -> void:
+	tierlist_name = tierlist_line_edit.text
+	save_tierlist(tierlist_name)
