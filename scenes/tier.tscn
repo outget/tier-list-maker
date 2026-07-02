@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://qcrhg3g2xcr1"]
+
+[ext_resource type="Script" uid="uid://ch6qlovrynn38" path="res://scripts/tier.gd" id="1_bgdk1"]
+[ext_resource type="Script" uid="uid://c1qqywx4niy6q" path="res://scripts/icon.gd" id="2_rtuu6"]
+[ext_resource type="Script" uid="uid://c2atnipribq3x" path="res://scripts/content_box.gd" id="3_s76k0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ied8"]
+resource_local_to_scene = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oh2cv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lafug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rgd5m"]
+
+[node name="Tier" type="HBoxContainer" unique_id=453245826]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bgdk1")
+
+[node name="Icon" type="PanelContainer" parent="." unique_id=839352967]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ied8")
+script = ExtResource("2_rtuu6")
+
+[node name="LineEdit" type="LineEdit" parent="Icon" unique_id=1228136883]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oh2cv")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_lafug")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rgd5m")
+text = "S"
+alignment = 1
+selecting_enabled = false
+
+[node name="Content" type="PanelContainer" parent="." unique_id=629313651]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ContentBox" type="HBoxContainer" parent="Content" unique_id=1927328255]
+layout_mode = 2
+script = ExtResource("3_s76k0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1957974172]
+layout_mode = 2
+alignment = 1
+
+[node name="Up" type="Button" parent="VBoxContainer" unique_id=1417958442]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "▲"
+
+[node name="Down" type="Button" parent="VBoxContainer" unique_id=182414978]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "▼"
+
+[node name="Delete" type="Button" parent="." unique_id=1194449136]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "X"
+
+[connection signal="editing_toggled" from="Icon/LineEdit" to="." method="_on_line_edit_editing_toggled"]
+[connection signal="text_submitted" from="Icon/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="VBoxContainer/Up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="VBoxContainer/Down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="Delete" to="." method="_on_delete_pressed"]

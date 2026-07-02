@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://be00tt1cfe5wm"]
+
+[ext_resource type="Script" uid="uid://bs4fx6n5woq20" path="res://scripts/tier_list.gd" id="1_mf6nw"]
+[ext_resource type="Texture2D" uid="uid://ce0ytd8tgy11u" path="res://save.svg" id="2_35wap"]
+[ext_resource type="Script" uid="uid://cqlstr6ykwyxd" path="res://scripts/grid_container.gd" id="2_mf6nw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgdk1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oh2cv"]
+
+[node name="TierList" type="Control" unique_id=124656573]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mf6nw")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1788340554]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer" unique_id=461570776]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Content" unique_id=302181428]
+layout_mode = 2
+
+[node name="TierListNameEdit" type="LineEdit" parent="MarginContainer/Content/HBoxContainer" unique_id=59347115]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Title"
+alignment = 1
+
+[node name="Save" type="Button" parent="MarginContainer/Content/HBoxContainer" unique_id=922981082]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+icon = ExtResource("2_35wap")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Content" unique_id=1707063019]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tiers" type="VBoxContainer" parent="MarginContainer/Content/ScrollContainer" unique_id=19108054]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddTier" type="Button" parent="MarginContainer/Content" unique_id=2088651060]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "+"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Content" unique_id=258560971]
+visible = false
+custom_maximum_size = Vector2(-1, 100)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_bgdk1")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/Content" unique_id=1216219185]
+layout_mode = 2
+
+[node name="OpenImageFolder" type="Button" parent="MarginContainer/Content/HBoxContainer2" unique_id=1624520822]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Open images folder"
+
+[node name="Reload" type="Button" parent="MarginContainer/Content/HBoxContainer2" unique_id=2074933502]
+layout_mode = 2
+text = "Reload"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Content/HBoxContainer2" unique_id=2043985649]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_oh2cv")
+
+[node name="Quit" type="Button" parent="MarginContainer/Content/HBoxContainer2" unique_id=976717042]
+layout_mode = 2
+text = "Quit"
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/Content" unique_id=42586200]
+custom_maximum_size = Vector2(-1, 105)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Content/ScrollContainer2" unique_id=599122923]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Content/ScrollContainer2/PanelContainer" unique_id=267850557]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 22
+script = ExtResource("2_mf6nw")
+
+[connection signal="pressed" from="MarginContainer/Content/HBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="MarginContainer/Content/AddTier" to="." method="_on_add_tier_pressed"]
+[connection signal="pressed" from="MarginContainer/Content/HBoxContainer2/OpenImageFolder" to="." method="_on_open_image_folder_pressed"]
+[connection signal="pressed" from="MarginContainer/Content/HBoxContainer2/Reload" to="." method="_on_reload_pressed"]
+[connection signal="pressed" from="MarginContainer/Content/HBoxContainer2/Quit" to="." method="_on_quit_pressed"]
